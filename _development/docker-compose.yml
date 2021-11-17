@@ -1,0 +1,22 @@
+version: '3.6'
+
+services:
+
+  dbcourier:
+    restart: always
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=fuaddauf
+    ports:
+      - 5436:5432
+  
+  adminercourier:
+    image: adminer
+    restart: always
+    ports:
+      - 8088:8080
+
+volumes: 
+  postgres_data:

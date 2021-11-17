@@ -1,0 +1,11 @@
+port: "8005"
+secret_key: "supersecretkey"
+
+db:
+  user: "postgres"
+  host: "localhost"
+  port: "5436"
+  password: "123456"
+  dbname: "postgres"
+  sslmode: "disable"
+  TimeZone: "Asia/Baku"
