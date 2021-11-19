@@ -3,9 +3,10 @@ version: '3.6'
 services:
   courier:
     # image: auth-app
-    build: ./
+    image: courier_web
+    build: .
     ports:
-      - 8005:8000
+      - 8003:8000
     volumes:
       - .:/code/
     # depends_on:
