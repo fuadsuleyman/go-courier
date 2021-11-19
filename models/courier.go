@@ -15,12 +15,13 @@ type Courier struct {
 	Lastname  string `validate:"required" gorm:"type:varchar(50); not null" json:"lastname"`
 	Email     string `validate:"required" gorm:"unique; type:varchar(50); not null" json:"email"`
 	// in update
+	Patronymic     string          `gorm:"type:varchar(50)" json:"patronymic"`
 	Phone          string          `gorm:"type:varchar(12)" json:"phone"`
 	Transport      string          `gorm:"type:varchar(150)" json:"transport"`
-	WorkExperience uint            `gorm:"type:varchar(150)" json:"work_experience"` // pythonda integer field
-	Rating         decimal.Decimal `gorm:"type:decimal(2,1);" json:"rating"`
-	Isavailable    bool            `json:"is_available"`
+	WorkExperience int             `json:"work_experience"` // pythonda integer field
+	Rating         decimal.Decimal `gorm:"type:decimal(2,1)" json:"rating"`
+	IsAvailable    bool            `json:"is_available"`
 	Location       string          `gorm:"type:varchar(255)" json:"location"`
-	Created_at     time.Time
-	Updated_at     time.Time
+	CreatedAt      time.Time       // `gorm:"default:current_timestamp"`
+	UpdatedAt      time.Time       // `gorm:"default:current_timestamp"`
 }
