@@ -26,7 +26,7 @@ func Connect() {
 	// DB = db
 
 	x := gorm.Open
-	connection, err := x(postgres.Open("host=192.168.31.74  user=lezzetly password=lezzetly123 dbname=db_name port=5432 sslmode=disable Timezone=Asia/Baku"))
+	connection, err := x(postgres.Open("host=client_postgres_1  user=lezzetly password=lezzetly123 dbname=db_name port=5432 sslmode=disable Timezone=Asia/Baku"))
 
 	
 	// connection, err := x(postgres.Open(fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s TimeZone=%s",
