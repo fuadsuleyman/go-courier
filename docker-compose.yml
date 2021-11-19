@@ -6,6 +6,8 @@ services:
     build: ./
     ports:
       - 8005:8000
+    volumes:
+      - .:/code/
     # depends_on:
     #   - db
     # environment:
