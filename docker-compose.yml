@@ -2,13 +2,9 @@ version: '3.6'
 
 services:
   courier:
-    # image: auth-app
-    image: courier_web
-    build: .
+    build: ./
     ports:
-      - 8003:8000
-    volumes:
-      - .:/code/
+      - 8005:8000
     # depends_on:
     #   - db
     # environment:
