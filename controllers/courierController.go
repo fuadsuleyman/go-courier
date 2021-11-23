@@ -196,7 +196,7 @@ func UpdateCourier(c *fiber.Ctx) error {
 		Email          string `json:"email"`
 		Phone          string `json:"phone"`
 		Transport      string `json:"transport"`
-		WorkExperience int    `json:"work_experince"`
+		WorkExperience int    `json:"work_experience"`
 		IsAvailable    bool   `json:"is_available"`
 		Location       string `json:"location"`
 	}
