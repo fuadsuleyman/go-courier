@@ -13,6 +13,10 @@ import (
 // I don't need this api
 func GetOrders(c *fiber.Ctx) error {
 
+	fmt.Println("port: ", c.Port())
+	fmt.Println("BaseURL: ", c.BaseURL())
+	fmt.Println("Hostname: ", c.Hostname())
+
 	var orders []models.Order
 
 	database.DB.Find(&orders)
