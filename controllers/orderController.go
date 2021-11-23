@@ -52,11 +52,13 @@ func PickOrder(c *fiber.Ctx) error {
 	// check order with param
 	id := c.Params("id")
 
+	fmt.Println("Parametrdeki ID: ", id)
+
 	var order models.Order
 
 	database.DB.Find(&order, "id = ?", id)
 
-	print("Tapdigim orderin id-si:", order.ID)
+	fmt.Println("Tapdigim orderin id-si:", order.ID)
 
 	notExistsMesssage := fmt.Sprintf("Order with id %v is not exists!", id)
 
