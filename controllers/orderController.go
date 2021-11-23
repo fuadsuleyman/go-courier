@@ -13,17 +13,17 @@ import (
 // I don't need this api
 func GetOrders(c *fiber.Ctx) error {
 
-	var orders []models.Courier
+	var orders []models.Order
 
 	database.DB.Find(&orders)
 
 	if len(orders) == 0 {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"warning": "Don't find any couriers!",
+			"warning": "Don't find any orders!",
 		})
 	}
 
-	ordersMessage := fmt.Sprintf("couriers(%v)", len(orders))
+	ordersMessage := fmt.Sprintf("orders(%v)", len(orders))
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		ordersMessage: orders,
