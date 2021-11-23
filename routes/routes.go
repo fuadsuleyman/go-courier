@@ -17,6 +17,10 @@ func SetupRoutes(app *fiber.App) {
 
 	app.Delete("/api/v1.0/couriers/:id", controllers.DeleteCourier)
 
+	// order apis
+
+	app.Get("/api/v1.0/orders", controllers.GetCouriers)
+
 
 }
 
