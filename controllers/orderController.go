@@ -18,8 +18,10 @@ func GetOrders(c *fiber.Ctx) error {
 	fmt.Println("Hostname: ", c.Hostname())
 	fmt.Println("Path: ", c.Path())
 
+	 
 	baseUrl := c.BaseURL()
-	port := baseUrl[6:]
+	myLen := len(baseUrl) - 4
+	port := baseUrl[myLen:]
 	
 	fmt.Println("custom port: ", port)
 
