@@ -19,7 +19,7 @@ func SetupRoutes(app *fiber.App) {
 
 	// order apis
 
-	app.Get("/api/v1.0/orders", controllers.GetCouriers)
+	app.Get("/api/v1.0/orders", controllers.GetOrders)
 
 
 }
