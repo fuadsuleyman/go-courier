@@ -16,6 +16,12 @@ func GetOrders(c *fiber.Ctx) error {
 	fmt.Println("port: ", c.Port())
 	fmt.Println("BaseURL: ", c.BaseURL())
 	fmt.Println("Hostname: ", c.Hostname())
+	fmt.Println("Path: ", c.Path())
+
+	baseUrl := c.BaseURL()
+	port := baseUrl[6:]
+	
+	fmt.Println("custom port: ", port)
 
 	var orders []models.Order
 
