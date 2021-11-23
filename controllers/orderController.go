@@ -69,11 +69,11 @@ func PickOrder(c *fiber.Ctx) error {
 	}
 
 	// check courier
-	username := resMap["Username"]
+	// username := resMap["Username"]
 
 	var currentCourier models.Courier
 
-	database.DB.Find(&currentCourier, "username = ?", username)
+	database.DB.Find(&currentCourier, "username = ?", "makil")
 	// currentCourier deyilse error
 	fmt.Println("currentCourier: ", currentCourier)
 
