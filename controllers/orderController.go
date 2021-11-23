@@ -82,8 +82,8 @@ func PickOrder(c *fiber.Ctx) error {
 			"warning": notExistsCourierMesssage,
 		})
 	}
-
-	if currentCourier.Username != username {
+	
+	if int64(currentCourier.Id) != order.CourierId {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You have not permission pick up order with this token!",
 		})	
@@ -167,7 +167,7 @@ func DeliverOrder(c *fiber.Ctx) error {
 		})
 	}
 
-	if currentCourier.Username != username {
+	if int64(currentCourier.Id) != order.CourierId {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You have not permission deliver order with this token!",
 		})	
