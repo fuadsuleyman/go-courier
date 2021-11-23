@@ -89,7 +89,7 @@ func PickOrder(c *fiber.Ctx) error {
 		})	
 	}
 	
-	if order.IsActive == true {
+	if order.IsActive != true {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You can not pick up not active order!",
 		})
@@ -173,7 +173,7 @@ func DeliverOrder(c *fiber.Ctx) error {
 		})	
 	}
 	
-	if order.IsActive == true {
+	if order.IsActive != true {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You can not deliver not active order!",
 		})
