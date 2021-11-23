@@ -60,25 +60,56 @@ func PickOrder(c *fiber.Ctx) error {
 
 	fmt.Println("Tapdigim orderin id-si:", order.ID)
 
-	notExistsMesssage := fmt.Sprintf("Order with id %v is not exists!", id)
+	notExistsOrderMesssage := fmt.Sprintf("Order with id %v is not exists!", id)
 
 	if order.ID == 0 {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"warning": notExistsMesssage,
+			"warning": notExistsOrderMesssage,
 		})
 	}
 
 	// check courier
-	// username := resMap["Username"]
+	username := resMap["Username"]
 
 	var currentCourier models.Courier
 
-	database.DB.Find(&currentCourier, "username = ?", "makil")
-	// currentCourier deyilse error
-	fmt.Println("currentCourier: ", currentCourier)
+	database.DB.Find(&currentCourier, "username = ?", username)
 
+	notExistsCourierMesssage := fmt.Sprintf("Courier with username %v is not exists!", username)
+
+	if currentCourier.Id == 0 {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": notExistsCourierMesssage,
+		})
+	}
+
+	if currentCourier.Username != username {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "You have not permission pick up order with this token!",
+		})	
+	}
+	
+	if order.IsActive == false {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "You can not pick up not active order!",
+		})
+	}
+
+	order.Status = "courier on the way to client"
+
+	// Save the Changes
+    saveVal := database.DB.Save(&order)
+	fmt.Println("SaveVal in update: ", saveVal)
+
+	if saveVal.Error != nil {
+		return c.JSON(fiber.Map{
+			"warning": saveVal.Error.Error(),
+		})	
+	}
+
+	seccessMes := fmt.Sprintf("Order with %v id is picked by %v", order.ID, username)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"warning": "terminala bax",
+		"message": seccessMes,
 	})
 
 }
