@@ -179,6 +179,12 @@ func DeliverOrder(c *fiber.Ctx) error {
 		})
 	}
 
+	if order.Status != "courier on the way to client"{
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "First pick order from cook!",
+		})
+	}
+
 	order.Status = "order delivered"
 
 	// Save the Changes
