@@ -8,7 +8,13 @@ import (
 	// "github.com/fuadsuleyman/go-couriers/helper"
 	// "github.com/fuadsuleyman/go-couriers/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
 )
+
+func ReverseProxy(ctx *gin.Context) {
+	fmt.Println("I am from gin")
+}
+
 
 // I don't need this api
 func MyProxy(c *fiber.Ctx) error {
