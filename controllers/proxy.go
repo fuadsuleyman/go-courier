@@ -27,7 +27,8 @@ func MyProxy(c *fiber.Ctx) error {
 	fmt.Println("Hostname: ", c.Hostname())
 	fmt.Println("Path: ", c.Path())
 
-	 
+	origin, _ := url.Parse("http://192.168.31.74:8005/api/v1.0/proxy")
+	fmt.Println("origin:", origin)
 	baseUrl := c.BaseURL()
 	myLen := len(baseUrl) - 4
 	port := baseUrl[myLen:]
