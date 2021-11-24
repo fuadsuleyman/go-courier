@@ -9,6 +9,7 @@ import (
 	// "github.com/fuadsuleyman/go-couriers/models"
 	"github.com/gofiber/fiber/v2"
 	"net/url"
+	"net/http/httputil"
 )
 
 
@@ -43,11 +44,17 @@ func MyProxy(c *fiber.Ctx) error {
 
 	targetUrl, err := url.Parse(targetAddr)
 
+	// "net/http/httputil" part
+	p := httputil.NewSingleHostReverseProxy(targetUrl)
+
 	fmt.Println("targetHost:", targetHost)
 	fmt.Println("targetNamespace:", targetNamespace)
 	fmt.Println("targetAddr:", targetAddr)
 	fmt.Println("err:", err)
 	fmt.Println("targetUrl:", targetUrl)
+	fmt.Println("p from httputil:", p)
+
+
 
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
