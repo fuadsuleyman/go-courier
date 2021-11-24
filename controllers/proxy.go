@@ -52,7 +52,7 @@ func MyProxy(c *fiber.Ctx) error {
 	// "net/http/httputil" part
 	p := httputil.NewSingleHostReverseProxy(targetUrl)
 
-	fmt.Println("p from httputil:", p)
+	fmt.Println("p from httputil:", *p)
 
 	p.Director = func(request *http.Request) {
 		request.Host = targetUrl.Host
@@ -80,7 +80,7 @@ func MyProxy(c *fiber.Ctx) error {
 	fmt.Println("targetAddr:", targetAddr)
 	fmt.Println("err:", err)
 	fmt.Println("targetUrl:", targetUrl)
-	fmt.Println("p after mofications:", p)
+	fmt.Println("p after mofications:", *p)
 
 
 
