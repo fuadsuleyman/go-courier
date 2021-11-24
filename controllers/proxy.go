@@ -1,8 +1,8 @@
 package controllers
 
-
 import (
 	"fmt"
+	"strings"
 	// "log"
 	// "github.com/fuadsuleyman/go-couriers/database"
 	// "github.com/fuadsuleyman/go-couriers/helper"
@@ -22,8 +22,13 @@ func MyProxy(c *fiber.Ctx) error {
 	baseUrl := c.BaseURL()
 	myLen := len(baseUrl) - 4
 	port := baseUrl[myLen:]
+	path := c.Path()
 	
 	fmt.Println("custom port: ", port)
+
+	parts := strings.Split(strings.TrimPrefix(path, "/"), "/")
+
+	fmt.Println("parts", parts)
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "look at terminal",
