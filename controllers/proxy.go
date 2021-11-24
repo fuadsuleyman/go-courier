@@ -30,6 +30,12 @@ func MyProxy(c *fiber.Ctx) error {
 
 	fmt.Println("parts", parts)
 
+	targetHost := fmt.Sprintf("svc-%s", parts[1])
+	targetNamespace := fmt.Sprintf("svc-%s", parts[2])
+
+	fmt.Println("targetHost:", targetHost)
+	fmt.Println("targetNamespace:", targetNamespace)
+
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "look at terminal",
 	})
