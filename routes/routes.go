@@ -27,5 +27,7 @@ func SetupRoutes(app *fiber.App) {
 
 	app.Get("/api/v1.0/proxy", controllers.MyProxy)
 
+	
+
 }
 
