@@ -9,6 +9,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
+	github.com/gofiber/redirect/v2 v2.1.12 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
@@ -45,17 +46,17 @@ require (
 )
 
 require (
-	github.com/andybalholm/brotli v1.0.2 // indirect
+	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.7.6
 	github.com/go-playground/validator/v10 v10.9.0
 	github.com/google/uuid v1.3.0
-	github.com/klauspost/compress v1.13.4 // indirect
+	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/viper v1.9.0
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.31.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf // indirect
+	golang.org/x/sys v0.0.0-20211124211545-fe61309f8881 // indirect
 	gorm.io/driver/postgres v1.2.2
 )
