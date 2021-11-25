@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/fuadsuleyman/go-couriers/controllers"
 	"github.com/gofiber/fiber/v2"
+	"net/http"
 )
 
 func SetupRoutes(app *fiber.App) {
@@ -27,7 +28,11 @@ func SetupRoutes(app *fiber.App) {
 
 	app.Get("/api/v1.0/proxy", controllers.MyProxy)
 
-	
+	Mux := http.NewServeMux()
+
+	rh := http.RedirectHandler("http://192.168.31.74/api/v1.0/meals/", 307)
+	Mux.Handle("/api/v1.0/proxy", rh)	
 
 }
+
 
