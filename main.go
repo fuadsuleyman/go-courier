@@ -33,8 +33,8 @@ func main() {
 
 	app.Use(redirect.New(redirect.Config{
 		Rules: map[string]string{
-		  "/proxy": "http://192.168.31.74/api/v1.0/meals/",
-		  "/old/*": "/new/$1",
+		  "/register": "http://192.168.31.74:8008/api/v1.0/register",
+		  "/proxy": "http://192.168.31.74/api/v1.0/meals",
 		},
 		StatusCode: 301,
 	  }))
