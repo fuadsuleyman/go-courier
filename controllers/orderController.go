@@ -31,6 +31,31 @@ func GetOrders(c *fiber.Ctx) error {
 
 }
 
+
+// I don't need this api
+func GetOrder(c *fiber.Ctx) error {
+
+	var order models.Order
+
+	id := c.Params("id")
+
+	database.DB.Find(&order, "id = ?", id)
+
+
+	notExistsMesssage := fmt.Sprintf("Order with id %v is not exists!", id)
+
+	if order.ID == 0 {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": notExistsMesssage,
+		})
+	}
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"order": order,
+	})
+
+}
+
+
 func PickOrder(c *fiber.Ctx) error {
 	fmt.Println("Hi, from GetCourier!")
 	header := c.Get("Authorization")

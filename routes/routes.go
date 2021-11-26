@@ -21,6 +21,7 @@ func SetupRoutes(app *fiber.App) {
 	// order apis
 
 	app.Get("/api/v1.0/orders", controllers.GetOrders)
+	app.Get("/api/v1.0/orders/:id", controllers.GetOrder)
 	app.Get("/api/v1.0/orders/:id/pick-up", controllers.PickOrder)
 	app.Get("/api/v1.0/orders/:id/deliver", controllers.DeliverOrder)
 
@@ -36,3 +37,11 @@ func SetupRoutes(app *fiber.App) {
 }
 
 
+// func ReverseProxy(target string) gin.HandlerFunc {
+//     url, err := url.Parse(target)
+//     checkErr(err)
+//     proxy := httputil.NewSingleHostReverseProxy(url)
+//     return func(c *gin.Context) {
+//         proxy.ServeHTTP(c.Writer, c.Request)
+//     }
+// }
