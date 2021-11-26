@@ -8,7 +8,7 @@ import (
 
 func SetupRoutes(app *fiber.App) {
 	
-	app.Get("/api/v1.0/couriers", controllers.GetCouriers)
+	app.Get("/api/v1.0/couriers/courier", controllers.GetCouriers)
 
 	app.Get("/api/v1.0/couriers/:id", controllers.GetCourier)
 
