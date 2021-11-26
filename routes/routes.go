@@ -8,7 +8,7 @@ import (
 
 func SetupRoutes(app *fiber.App) {
 	
-	app.Get("/api/v1.0/couriers/courier", controllers.GetCouriers)
+	app.Get("/api/v1.0/couriers", controllers.GetCouriers)
 
 	app.Get("/api/v1.0/couriers/:id", controllers.GetCourier)
 
@@ -20,7 +20,7 @@ func SetupRoutes(app *fiber.App) {
 
 	// order apis
 
-	app.Get("/api/v1.0/orders", controllers.GetOrders)
+	app.Get("/api/v1.0/orders/courier", controllers.GetOrders)
 	app.Get("/api/v1.0/orders/:id", controllers.GetOrder)
 	app.Get("/api/v1.0/orders/:id/pick-up", controllers.PickOrder)
 	app.Get("/api/v1.0/orders/:id/deliver", controllers.DeliverOrder)
