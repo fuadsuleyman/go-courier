@@ -75,17 +75,18 @@ func PickOrder(c *fiber.Ctx) error {
 	}
 
 	// check order with param
-	id := c.Params("id")
+	// id := c.Params("id")
 
-	fmt.Println("Parametrdeki ID: ", id)
+	// fmt.Println("Parametrdeki ID: ", id)
 
 	var order models.Order
 
-	database.DB.Find(&order, "id = ?", id)
+	database.DB.Where("courier.username = ? AND is_active = ?", resMap["Username"], true).Find(&order)
+	// database.DB.Find(&order, "courier.username = ?", resMap["Username"])
 
 	fmt.Println("Tapdigim orderin id-si:", order.ID)
 
-	notExistsOrderMesssage := fmt.Sprintf("Order with id %v is not exists!", id)
+	notExistsOrderMesssage := fmt.Sprintf("This Courier have not active order to pick up!")
 
 	if order.ID == 0 {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
