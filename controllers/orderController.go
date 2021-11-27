@@ -80,20 +80,7 @@ func PickOrder(c *fiber.Ctx) error {
 
 	// fmt.Println("Parametrdeki ID: ", id)
 
-	var order models.Order
-
-	database.DB.Where("courier.username = ? AND is_active = ?", resMap["Username"], true).Find(&order)
-	// database.DB.Find(&order, "courier.username = ?", resMap["Username"])
-
-	fmt.Println("Tapdigim orderin id-si:", order.ID)
-
-	notExistsOrderMesssage := fmt.Sprintf("This Courier have not active order to pick up!")
-
-	if order.ID == 0 {
-		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"warning": notExistsOrderMesssage,
-		})
-	}
+	
 
 	// check courier
 	username := resMap["Username"]
@@ -107,6 +94,22 @@ func PickOrder(c *fiber.Ctx) error {
 	if currentCourier.Id == 0 {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": notExistsCourierMesssage,
+		})
+	}
+
+
+	var order models.Order
+
+	database.DB.Where("courier_id = ? AND is_active = ?", currentCourier.Id, true).Find(&order)
+	// database.DB.Find(&order, "courier.username = ?", resMap["Username"])
+
+	fmt.Println("Tapdigim orderin id-si:", order.ID)
+
+	notExistsOrderMesssage := fmt.Sprintf("This Courier have not active order to pick up!")
+
+	if order.ID == 0 {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": notExistsOrderMesssage,
 		})
 	}
 	
