@@ -12,6 +12,7 @@ import (
 
 // I don't need this api
 func GetOrders(c *fiber.Ctx) error {
+	fmt.Println("Ertered to get orders")
 
 	var orders []models.Order
 

@@ -11,6 +11,7 @@ import (
 
 // I don't need this api
 func GetCouriers(c *fiber.Ctx) error {
+	fmt.Println("Entered to GetCouriers")
 
 	var couriers []models.Courier
 
@@ -31,6 +32,7 @@ func GetCouriers(c *fiber.Ctx) error {
 }
 
 func GetCourier(c *fiber.Ctx) error {
+	fmt.Println("Entered to GetCourier")
 	fmt.Println("Hi, from GetCourier!")
 	header := c.Get("Authorization")
 	resMap := helper.CheckToken(header)
@@ -80,7 +82,7 @@ func GetCourier(c *fiber.Ctx) error {
 }
 
 func CreateCourier(c *fiber.Ctx) error {
-	fmt.Println("Hi, from Create Courier!")
+	fmt.Println("Entered to CreateCourier")
 	header := c.Get("Authorization")
 	resMap := helper.CheckToken(header)
 	if _, ok := resMap["warning"]; ok {
@@ -138,7 +140,7 @@ func CreateCourier(c *fiber.Ctx) error {
 	if createVal.Error != nil {
 		return c.JSON(fiber.Map{
 			"warning": createVal.Error.Error(),
-		})	
+		})
 	}
 
 	responseMessage := fmt.Sprintf("Courier with id %v is successfully created!", courier.Id)
@@ -202,17 +204,17 @@ func UpdateCourier(c *fiber.Ctx) error {
 	}
 
 	// Store the body containing the updated data and return error if encountered
-    var updateCourierData updateCourier
-    err := c.BodyParser(&updateCourierData)
+	var updateCourierData updateCourier
+	err := c.BodyParser(&updateCourierData)
 
 	if err != nil {
-        return c.Status(fiber.StatusOK).JSON(fiber.Map{"warning": "Review your input", "data": err})
-    }
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{"warning": "Review your input", "data": err})
+	}
 
 	// Edit the courier
-    courier.Firstname = updateCourierData.Firstname
-    courier.Lastname = updateCourierData.Lastname
-    courier.Patronymic = updateCourierData.Patronymic
+	courier.Firstname = updateCourierData.Firstname
+	courier.Lastname = updateCourierData.Lastname
+	courier.Patronymic = updateCourierData.Patronymic
 	courier.Phone = updateCourierData.Phone
 	courier.Email = updateCourierData.Email
 	courier.Transport = updateCourierData.Transport
@@ -220,16 +222,15 @@ func UpdateCourier(c *fiber.Ctx) error {
 	courier.IsAvailable = updateCourierData.IsAvailable
 	courier.Location = updateCourierData.Location
 
-    // Save the Changes
-    saveVal := database.DB.Save(&courier)
+	// Save the Changes
+	saveVal := database.DB.Save(&courier)
 	fmt.Println("SaveVal in update: ", saveVal)
 
 	if saveVal.Error != nil {
 		return c.JSON(fiber.Map{
 			"warning": saveVal.Error.Error(),
-		})	
+		})
 	}
-
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"Seccessfully Updated": courier})
 
