@@ -23,7 +23,7 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/api/v1.0/couriers/orders", controllers.GetOrders)
 	app.Get("/api/v1.0/couriers/orders/:id", controllers.GetOrder)
 	app.Get("/api/v1.0/pick-up", controllers.PickOrder)
-	app.Get("/api/v1.0/couriers/:id/deliver", controllers.DeliverOrder) // here id is order id
+	app.Get("/api/v1.0/deliver", controllers.DeliverOrder)
 
 	// proxy
 
