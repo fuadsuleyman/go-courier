@@ -223,7 +223,7 @@ func DeliverOrder(c *fiber.Ctx) error {
 
 	if order.IsActive != true {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"warning": "You can not deliver not active order!",
+			"warning": "You can't deliver not active order!",
 		})
 	}
 
@@ -233,7 +233,7 @@ func DeliverOrder(c *fiber.Ctx) error {
 		})
 	}
 
-	if order.Status != "order delivered!"{
+	if order.Status == "order delivered!"{
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You already delivered this order!",
 		})
