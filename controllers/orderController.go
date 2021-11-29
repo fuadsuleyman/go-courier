@@ -227,7 +227,7 @@ func DeliverOrder(c *fiber.Ctx) error {
 		})
 	}
 
-	if order.Status != "order on way"{
+	if order.Status != "order on way" && order.Status != "order delivered!"{
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "First pick order from cook!",
 		})
