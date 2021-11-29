@@ -99,7 +99,7 @@ func PickOrder(c *fiber.Ctx) error {
 
 
 	var order models.Order
-
+	fmt.Println("currentCourier.Id", currentCourier.Id)
 	database.DB.Where("courier_id = ? AND is_active = ?", currentCourier.Id, true).Find(&order)
 	// database.DB.Find(&order, "courier.username = ?", resMap["Username"])
 
