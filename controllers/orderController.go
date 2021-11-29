@@ -125,7 +125,7 @@ func PickOrder(c *fiber.Ctx) error {
 		})
 	}
 
-	if order.Status != "order is ready, waiting for the courier" {
+	if order.Status != "order is ready, waiting for courier" {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "The order is not ready, please wait!",
 		})
