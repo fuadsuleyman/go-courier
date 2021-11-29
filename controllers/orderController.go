@@ -80,7 +80,7 @@ func PickOrder(c *fiber.Ctx) error {
 
 	// fmt.Println("Parametrdeki ID: ", id)
 
-	
+
 
 	// check courier
 	username := resMap["Username"]
@@ -112,20 +112,32 @@ func PickOrder(c *fiber.Ctx) error {
 			"warning": notExistsOrderMesssage,
 		})
 	}
-	
+
 	if int64(currentCourier.Id) != order.CourierId {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You have not permission pick up order with this token!",
-		})	
+		})
 	}
-	
+
 	if order.IsActive != true {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You can not pick up not active order!",
 		})
 	}
 
-	order.Status = "courier on the way to client"
+	if order.Status != "order is ready, waiting for the courier" {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "The order is not ready, please wait!",
+		})
+	}
+
+	if order.Status == "order delivered" {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "You already delivered this order!",
+		})
+	}
+
+	order.Status = "order on way"
 
 	// Save the Changes
     saveVal := database.DB.Save(&order)
@@ -134,7 +146,7 @@ func PickOrder(c *fiber.Ctx) error {
 	if saveVal.Error != nil {
 		return c.JSON(fiber.Map{
 			"warning": saveVal.Error.Error(),
-		})	
+		})
 	}
 
 	seccessMes := fmt.Sprintf("Order with %v id is picked by %v", order.ID, username)
@@ -164,11 +176,8 @@ func DeliverOrder(c *fiber.Ctx) error {
 	}
 
 	// check order with param
-	id := c.Params("id")
+	// id := c.Params("id")
 
-	fmt.Println("Parametrdeki ID: ", id)
-
-	
 	// check courier
 	username := resMap["Username"]
 
@@ -191,7 +200,7 @@ func DeliverOrder(c *fiber.Ctx) error {
 
 	fmt.Println("Tapdigim orderin id-si:", order.ID)
 
-	notExistsOrderMesssage := fmt.Sprintf("Order with id %v is not exists!", id)
+	notExistsOrderMesssage := fmt.Sprintf("Order with id %v is not exists!", order.ID)
 
 	if order.ID == 0 {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
@@ -203,16 +212,18 @@ func DeliverOrder(c *fiber.Ctx) error {
 	if int64(currentCourier.Id) != order.CourierId {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You have not permission deliver order with this token!",
-		})	
+		})
 	}
-	
+
 	if order.IsActive != true {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You can not deliver not active order!",
 		})
 	}
 
-	if order.Status != "courier on the way to client"{
+
+
+	if order.Status != "order on way"{
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "First pick order from cook!",
 		})
@@ -227,7 +238,7 @@ func DeliverOrder(c *fiber.Ctx) error {
 	if saveVal.Error != nil {
 		return c.JSON(fiber.Map{
 			"warning": saveVal.Error.Error(),
-		})	
+		})
 	}
 
 	seccessMes := fmt.Sprintf("Order with %v id is delived to client by %v", order.ID, username)
