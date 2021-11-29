@@ -226,14 +226,16 @@ func DeliverOrder(c *fiber.Ctx) error {
 			"warning": "You can't deliver not active order!",
 		})
 	}
+	// fmt.Println("order.Status != 'order on way':", order.Status != "order on way")
+	// fmt.Println("order.Status != 'order on way':", order.Status != "order on way")
 
-	if order.Status != "order on way" && order.Status != "order delivered!"{
+	if order.Status != "order on way" && order.Status != "order delivered"{
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "First pick order from cook!",
 		})
 	}
 
-	if order.Status == "order delivered!"{
+	if order.Status == "order delivered"{
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You already delivered this order!",
 		})
