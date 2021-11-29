@@ -133,7 +133,13 @@ func PickOrder(c *fiber.Ctx) error {
 
 	if order.Status == "order delivered" {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"warning": "You already delivered this order!",
+			"warning": "You already delivered this order, you can not pick it!",
+		})
+	}
+
+	if order.Status == "order on way" {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "You already pick up this order!",
 		})
 	}
 
@@ -221,11 +227,15 @@ func DeliverOrder(c *fiber.Ctx) error {
 		})
 	}
 
-
-
 	if order.Status != "order on way"{
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "First pick order from cook!",
+		})
+	}
+
+	if order.Status != "order delivered!"{
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "You already delivered this order!",
 		})
 	}
 
