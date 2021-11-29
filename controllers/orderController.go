@@ -125,12 +125,6 @@ func PickOrder(c *fiber.Ctx) error {
 		})
 	}
 
-	if order.Status != "order is ready, waiting for courier" {
-		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"warning": "The order is not ready, please wait!",
-		})
-	}
-
 	if order.Status == "order delivered" {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You already delivered this order, you can not pick it!",
@@ -140,6 +134,12 @@ func PickOrder(c *fiber.Ctx) error {
 	if order.Status == "order on way" {
 		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"warning": "You already pick up this order!",
+		})
+	}
+
+	if order.Status != "order is ready, waiting for courier" {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"warning": "The order is not ready, please wait!",
 		})
 	}
 
