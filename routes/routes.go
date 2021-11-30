@@ -21,6 +21,6 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/api/v1.0/deliver", controllers.DeliverOrder)
 
 	// not found message
-	app.Get("/api/v1.0/404", controllers.NotFound)
+	app.Get("/api/v1.0/404/:anyword", controllers.NotFound)
 
 }
